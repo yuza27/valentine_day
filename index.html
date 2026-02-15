@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Suprise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes floating {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes pulse-slow {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .animate-floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse-slow 2s ease-in-out infinite;
+        }
+        
+        .animate-delay-300 {
+            animation-delay: 0.3s;
+        }
+        
+        .animate-delay-600 {
+            animation-delay: 0.6s;
+        }
+    </style>
+</head>
+<body class="bg-white min-h-screen flex flex-col items-center justify-center overflow-hidden">
+    <!-- Floating Hearts Background -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-20 left-10 text-red-300 text-2xl animate-floating" style="animation-delay: 0s;">🤍</div>
+        <div class="absolute top-40 right-16 text-red-300 text-xl animate-floating" style="animation-delay: 1s;">🤍</div>
+        <div class="absolute bottom-32 left-20 text-red-300 text-lg animate-floating" style="animation-delay: 2s;">🤍</div>
+        <div class="absolute bottom-20 right-24 text-red-300 text-2xl animate-floating" style="animation-delay: 1.5s;">🤍</div>
+        <div class="absolute top-60 left-1/4 text-red-300 text-sm animate-floating" style="animation-delay: 2.5s;">🤍</div>
+        <div class="absolute top-80 right-1/3 text-red-300 text-lg animate-floating" style="animation-delay: 0.5s;">🤍</div>
+    </div>
+
+    <!-- Audio Element -->
+    <!--<audio id="backgroundMusic" loop>
+        <source src="assets/hbd.mpeg" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio> -->
+
+    <!-- Music Control Button -->
+    <!--<div class="fixed top-6 right-6 z-50 animate-fade-in-up animate-delay-600">
+        <button 
+            id="musicToggle"
+            class="bg-black text-white p-3 rounded-full hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-110"
+            onclick="toggleMusic()"
+        >
+            <span id="musicIcon">🎵</span>
+        </button>
+    </div> -->
+
+    <div class="text-center px-6 relative z-10">
+        <!-- Judul Utama -->
+        <h1 class="text-4xl md:text-6xl font-bold text-black mb-8 leading-tight animate-fade-in-up">
+            I have supprise for you ❤️
+        </h1>
+        
+        <!-- Tombol -->
+        <button 
+            onclick="redirectWithEffect()"
+            class="bg-black text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-gray-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 animate-fade-in-up animate-delay-300 animate-pulse-slow"
+        >
+            👉 Click me for something sweet 🍫
+        </button>
+    </div>
+
+    <script>
+        let isPlaying = false;
+        const audio = document.getElementById('backgroundMusic');
+        const musicIcon = document.getElementById('musicIcon');
+
+        function toggleMusic() {
+            if (isPlaying) {
+                audio.pause();
+                musicIcon.textContent = '🎵';
+                isPlaying = false;
+            } else {
+                audio.play().catch(function(error) {
+                    console.log('Audio play failed:', error);
+                });
+                musicIcon.textContent = '🔇';
+                isPlaying = true;
+            }
+        }
+
+        // Auto play when page loads (with user interaction)
+        document.addEventListener('click', function() {
+            if (!isPlaying) {
+                toggleMusic();
+            }
+        }, { once: true });
+
+        // Smooth redirect with fade effect
+        function redirectWithEffect() {
+            document.body.style.transition = 'opacity 0.5s ease-out';
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location.href = 'ucapan.html';
+            }, 500);
+        }
+    </script>
+</body>
+</html>
